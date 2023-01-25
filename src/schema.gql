@@ -1,0 +1,21 @@
+# ------------------------------------------------------
+# THIS FILE WAS AUTOMATICALLY GENERATED (DO NOT MODIFY)
+# ------------------------------------------------------
+
+type Servey {
+  id: Int!
+  title: String
+}
+
+type Query {
+  allServeies: [Servey!]!
+  servey(id: Int!): Servey!
+}
+
+type Mutation {
+  create(createServeyInput: CreateServeyDto!): Servey!
+}
+
+input CreateServeyDto {
+  title: String!
+}
