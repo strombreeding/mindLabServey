@@ -1,6 +1,6 @@
 import { Field, Int, ObjectType } from '@nestjs/graphql';
 import { Question } from 'src/question/config/question.entity';
-import { Success } from 'src/success/success.entity';
+import { Success } from 'src/success/config/success.entity';
 import {
   Column,
   CreateDateColumn,
@@ -15,20 +15,24 @@ import {
 @Entity()
 @Unique(['title'])
 export class Servey {
-  @Field(() => Int)
+  @Field()
   @PrimaryGeneratedColumn()
   id: number;
 
-  @Field(() => String, { nullable: true })
+  @Field()
   @Column()
   title: string;
+
+  @Field()
+  @Column()
+  description: string;
 
   @Field()
   @CreateDateColumn()
   created: Date;
 
-  @Field(() => [Success], { nullable: true })
-  @OneToMany(() => Success, (success) => success.servey)
+  // @Field(() => [Success], { nullable: true })
+  @OneToMany(() => Success, (success) => success.fromServey)
   success: Success[];
 
   @Field(() => [Question], { nullable: true })

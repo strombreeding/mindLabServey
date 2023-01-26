@@ -9,5 +9,5 @@ export const typeORMConfig: TypeOrmModuleOptions = {
   database: 'servey',
 
   entities: [__dirname + '/../**/*.entity.{js,ts}'],
-  synchronize: true,
+  // synchronize: true,
 };

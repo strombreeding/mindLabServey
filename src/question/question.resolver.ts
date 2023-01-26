@@ -12,6 +12,8 @@ import { CreateQuestionDto } from './config/create.dto';
 import * as utilFn from '../utils/usefulFn';
 import { QuestionService } from './question.service';
 import { Question } from './config/question.entity';
+import { Answer } from 'src/answer/config/answer.entity';
+import { UpdateQuestionDto } from './config/update.dto';
 
 @Resolver(() => Question)
 export class QeustionResolver {
@@ -22,15 +24,51 @@ export class QeustionResolver {
     @Args('createQuestuinInput') createQuestionDto: CreateQuestionDto,
   ) {
     try {
+      console.log('오류잡아라');
       const newServey = await this.questionService.create(createQuestionDto);
       return newServey;
     } catch (err) {
       console.log(err.message);
       if (err.message.includes('dupli'))
         throw new ApolloError('해당 title로 이미 설문이 존재합니다.');
+      throw new ApolloError(err);
     }
   }
 
-  //   @Mutation(()=>Servey)
-  //   async createServey(@Args()){}
+  /**question 의 text를 변경합니다 */
+  @Mutation(() => Question)
+  async updateQuestion(@Args('toChange') UpdateQuestionDto: UpdateQuestionDto) {
+    try {
+      const newServey = await this.questionService.changeQuestion(
+        UpdateQuestionDto,
+      );
+      return newServey;
+    } catch (err) {
+      console.log(err.message);
+      throw new ApolloError(err);
+    }
+  }
+
+  @Mutation(() => Boolean)
+  async deleteQuestion(@Args('inputQuestionId') id: number) {
+    try {
+      const newServey = await this.questionService.delete(id);
+      return newServey;
+    } catch (err) {
+      console.log(err.message);
+      throw new ApolloError(err.message);
+    }
+  }
+
+  @ResolveField(() => [Answer])
+  async hasAnswers(@Parent() question: Question) {
+    // console.log('quetion resolver ', question);
+    try {
+      const questions = await this.questionService.getAnswers(question);
+      // console.log('🐳', questions);
+      return questions;
+    } catch (err) {
+      console.log(err.message);
+    }
+  }
 }

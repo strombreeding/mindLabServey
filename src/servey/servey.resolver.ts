@@ -8,11 +8,11 @@ import {
   Mutation,
 } from '@nestjs/graphql';
 import { ApolloError } from 'apollo-server-express';
-import { CreateServeyDto } from './config/create.dto';
 import { Servey } from './config/servey.entity';
 import { ServeyService } from './servey.service';
 import * as utilFn from '../utils/usefulFn';
 import { QuestionService } from 'src/question/question.service';
+import { UpdateServeyDto } from './config/update.dto';
 
 @Resolver(() => Servey)
 export class ServeysResolver {
@@ -38,7 +38,7 @@ export class ServeysResolver {
   }
 
   @Query(() => Servey)
-  async servey(@Args('id', { type: () => Int }) id: number) {
+  async servey(@Args('serveyId', { type: () => Int }) id: number) {
     try {
       const servey = await this.serveyService.getOne(id);
       console.log('enter Servey');
@@ -53,10 +53,9 @@ export class ServeysResolver {
   }
 
   @Mutation(() => Servey)
-  async newServey(@Args('createServeyInput') createServeyDto: CreateServeyDto) {
+  async newServey() {
     try {
-      console.log(createServeyDto, '난리졸브');
-      const newServey = await this.serveyService.create(createServeyDto);
+      const newServey = await this.serveyService.create();
       return newServey;
     } catch (err) {
       console.log(err.message);
@@ -64,18 +63,38 @@ export class ServeysResolver {
         throw new ApolloError('해당 title로 이미 설문이 존재합니다.');
     }
   }
+  @Mutation(() => Servey)
+  /**Servey 의 title과 description 을 변경하게 해줍니다. */
+  async updateServey(@Args('toChange') updateServeyDto: UpdateServeyDto) {
+    try {
+      const newServey = await this.serveyService.changeTitle(updateServeyDto);
+      return newServey;
+    } catch (err) {
+      console.log(err.message);
+      throw new ApolloError(err);
+    }
+  }
+
+  @Mutation(() => Boolean)
+  async deleteServey(@Args('deleteToServey') serveyId: number) {
+    try {
+      const remove = await this.serveyService.delete(serveyId);
+      return remove;
+    } catch (err) {
+      console.log(err.message);
+      throw new ApolloError(err);
+    }
+  }
 
   @ResolveField()
   async hasQuestions(@Parent() servey: Servey) {
     console.log('enter resolveField ', servey.id);
     try {
-      const a = await this.questionService.getAll(servey.id);
-      console.log('🐳', a);
-      return a;
+      const questions = await this.questionService.getAll(servey.id);
+      // console.log('🐳', questions);
+      return questions;
     } catch (err) {
       console.log(err.message);
     }
   }
-  //   @Mutation(()=>Servey)
-  //   async createServey(@Args()){}
 }

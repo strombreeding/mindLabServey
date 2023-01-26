@@ -11,6 +11,7 @@ import { SuccessModule } from './success/success.module';
 import { QuestionModule } from './question/question.module';
 import { AnswerModule } from './answer/answer.module';
 import { QuestionService } from './question/question.service';
+import { AnswerService } from './answer/answer.service';
 
 @Module({
   imports: [
@@ -25,6 +26,6 @@ import { QuestionService } from './question/question.service';
     AnswerModule,
   ],
   controllers: [AppController],
-  providers: [AppService, ServeyService, QuestionService],
+  providers: [AppService, ServeyService, QuestionService, AnswerService],
 })
 export class AppModule {}

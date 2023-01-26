@@ -1,4 +1,5 @@
 import { Field, Int, ObjectType } from '@nestjs/graphql';
+import { Answer } from 'src/answer/config/answer.entity';
 import { Servey } from 'src/servey/config/servey.entity';
 import {
   Column,
@@ -6,6 +7,8 @@ import {
   ManyToOne,
   CreateDateColumn,
   PrimaryGeneratedColumn,
+  OneToMany,
+  BaseEntity,
 } from 'typeorm';
 
 @ObjectType()
@@ -16,7 +19,7 @@ export class Question {
   id: number;
 
   @Field()
-  @Column({ default: '질문 (수정하기)' })
+  @Column({})
   text: string;
 
   @Field()
@@ -24,13 +27,19 @@ export class Question {
   created: Date;
 
   @Field()
-  @Column({ nullable: true })
+  @Column()
   isObjective: boolean;
 
-  @Field({ nullable: true })
-  @Column()
+  @Field()
+  @Column({ nullable: false })
   serveyId: number;
 
   @ManyToOne(() => Servey, (servey) => servey.hasQuestions)
   fromServey: Servey;
+
+  @Field(() => [Answer], { nullable: true })
+  @OneToMany(() => Answer, (answer) => answer.fromQuestion)
+  hasAnswers: Answer[];
+
+  //
 }

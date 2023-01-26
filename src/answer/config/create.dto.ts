@@ -1,11 +1,11 @@
 import { Field, InputType } from '@nestjs/graphql';
 
 @InputType()
-export class CreateQuestionDto {
+export class CreateAnswerDto {
   @Field()
-  fromServeyId: number;
+  questionId: number;
 
   @Field()
-  isObjective: boolean;
+  reward: number;
 }
 //

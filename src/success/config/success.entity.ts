@@ -5,7 +5,7 @@ import { Column, Entity, ManyToOne, OneToOne, PrimaryColumn } from 'typeorm';
 @ObjectType()
 @Entity()
 export class Success {
-  @Field(() => Int)
+  @Field(() => Number)
   @PrimaryColumn({ type: 'bigint' })
   id: number;
 
@@ -13,7 +13,11 @@ export class Success {
   @Column()
   score: number;
 
+  @Field(() => Int, { nullable: true })
+  @Column({ nullable: false })
+  serveyId: number;
+
   @Field(() => Servey, { nullable: true })
   @ManyToOne(() => Servey, (servey) => servey.success)
-  servey: Servey;
+  fromServey: Servey;
 }
