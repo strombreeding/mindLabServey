@@ -16,7 +16,10 @@ export class ServeyService {
   }
 
   async getOne(id: number): Promise<Servey> {
-    const servey = await this.serveyRepository.findOne({ where: { id } });
+    const servey = await this.serveyRepository.findOne({
+      where: { id },
+      relations: ['success', 'hasQuestions'],
+    });
     return servey;
   }
 

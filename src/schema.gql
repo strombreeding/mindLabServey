@@ -2,9 +2,31 @@
 # THIS FILE WAS AUTOMATICALLY GENERATED (DO NOT MODIFY)
 # ------------------------------------------------------
 
+type Question {
+  id: Int!
+  text: String!
+  created: DateTime!
+  isObjective: Boolean!
+  serveyId: Float
+}
+
+"""
+A date-time string at UTC, such as 2019-12-03T09:54:33Z, compliant with the date-time format.
+"""
+scalar DateTime
+
+type Success {
+  id: Int!
+  score: Int
+  servey: Servey
+}
+
 type Servey {
   id: Int!
   title: String
+  created: DateTime!
+  success: [Success!]
+  hasQuestions: [Question!]
 }
 
 type Query {
@@ -13,9 +35,15 @@ type Query {
 }
 
 type Mutation {
-  create(createServeyInput: CreateServeyDto!): Servey!
+  newServey(createServeyInput: CreateServeyDto!): Servey!
+  newQuestion(createQuestuinInput: CreateQuestionDto!): Question!
 }
 
 input CreateServeyDto {
   title: String!
+}
+
+input CreateQuestionDto {
+  fromServeyId: Float!
+  isObjective: Boolean!
 }

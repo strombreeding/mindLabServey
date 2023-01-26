@@ -11,11 +11,15 @@ import { ApolloError } from 'apollo-server-express';
 import { CreateServeyDto } from './config/create.dto';
 import { Servey } from './config/servey.entity';
 import { ServeyService } from './servey.service';
-import * as utilFn from '../../utils/usefulFn';
+import * as utilFn from '../utils/usefulFn';
+import { QuestionService } from 'src/question/question.service';
 
 @Resolver(() => Servey)
 export class ServeysResolver {
-  constructor(private readonly serveyService: ServeyService) {}
+  constructor(
+    private readonly serveyService: ServeyService,
+    private readonly questionService: QuestionService,
+  ) {}
 
   @Query(() => [Servey])
   async allServey() {
@@ -37,7 +41,7 @@ export class ServeysResolver {
   async servey(@Args('id', { type: () => Int }) id: number) {
     try {
       const servey = await this.serveyService.getOne(id);
-      console.log(servey);
+      console.log('enter Servey');
       if (servey === null)
         throw new ApolloError('존재하지 않는 설문지', 'NOT_EXIST_USER');
       return servey;
@@ -49,17 +53,29 @@ export class ServeysResolver {
   }
 
   @Mutation(() => Servey)
-  async create(@Args('createServeyInput') createServeyDto: CreateServeyDto) {
+  async newServey(@Args('createServeyInput') createServeyDto: CreateServeyDto) {
     try {
       console.log(createServeyDto, '난리졸브');
       const newServey = await this.serveyService.create(createServeyDto);
       return newServey;
     } catch (err) {
+      console.log(err.message);
       if (err.message.includes('dupli'))
         throw new ApolloError('해당 title로 이미 설문이 존재합니다.');
     }
   }
 
+  @ResolveField()
+  async hasQuestions(@Parent() servey: Servey) {
+    console.log('enter resolveField ', servey.id);
+    try {
+      const a = await this.questionService.getAll(servey.id);
+      console.log('🐳', a);
+      return a;
+    } catch (err) {
+      console.log(err.message);
+    }
+  }
   //   @Mutation(()=>Servey)
   //   async createServey(@Args()){}
 }

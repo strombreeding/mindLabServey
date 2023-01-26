@@ -10,6 +10,7 @@ import { ApolloDriver, ApolloDriverConfig } from '@nestjs/apollo';
 import { SuccessModule } from './success/success.module';
 import { QuestionModule } from './question/question.module';
 import { AnswerModule } from './answer/answer.module';
+import { QuestionService } from './question/question.service';
 
 @Module({
   imports: [
@@ -24,6 +25,6 @@ import { AnswerModule } from './answer/answer.module';
     AnswerModule,
   ],
   controllers: [AppController],
-  providers: [AppService, ServeyService],
+  providers: [AppService, ServeyService, QuestionService],
 })
 export class AppModule {}
