@@ -11,15 +11,18 @@ import { ApolloError } from 'apollo-server-express';
 import { CreateServeyDto } from './config/create.dto';
 import { Servey } from './config/servey.entity';
 import { ServeyService } from './servey.service';
+import * as utilFn from '../../utils/usefulFn';
+
 @Resolver(() => Servey)
 export class ServeysResolver {
   constructor(private readonly serveyService: ServeyService) {}
 
   @Query(() => [Servey])
-  async allServeies() {
+  async allServey() {
     try {
       const servey = await this.serveyService.getAll();
       console.log(servey);
+      console.log(utilFn.randomNumber());
       if (servey.length === 0)
         throw new ApolloError('설문이 존재하지 않습니다.', 'NOT_EXIST_USER');
       return servey;

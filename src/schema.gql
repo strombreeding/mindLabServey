@@ -8,7 +8,7 @@ type Servey {
 }
 
 type Query {
-  allServeies: [Servey!]!
+  allServey: [Servey!]!
   servey(id: Int!): Servey!
 }
 

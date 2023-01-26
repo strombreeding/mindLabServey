@@ -7,6 +7,9 @@ import { typeORMConfig } from './configs/typeorm.config';
 import { ServeyService } from './servey/servey.service';
 import { ServeyModule } from './servey/servey.module';
 import { ApolloDriver, ApolloDriverConfig } from '@nestjs/apollo';
+import { SuccessModule } from './success/success.module';
+import { QuestionModule } from './question/question.module';
+import { AnswerModule } from './answer/answer.module';
 
 @Module({
   imports: [
@@ -16,6 +19,9 @@ import { ApolloDriver, ApolloDriverConfig } from '@nestjs/apollo';
       autoSchemaFile: 'src/schema.gql',
     }),
     ServeyModule,
+    SuccessModule,
+    QuestionModule,
+    AnswerModule,
   ],
   controllers: [AppController],
   providers: [AppService, ServeyService],
