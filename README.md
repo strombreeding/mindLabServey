@@ -181,7 +181,7 @@ mutation {
 - 선택지의 순서는 listNumber 입니다
 - 한 문항에 최대 10개 까지 답변(선택지)를 등록할 수 있습니다.
 - reward 는 해당 답변을 선택했을때 오르게 될 점수 입니다. 기본값 0
-  ![과제 특이사항 중](https://s3-us-west-2.amazonaws.com/secure.notion-static.com/1022327c-ad55-4bb5-b687-d0f80c4a7fa1/Untitled.png)
+  ![image](https://user-images.githubusercontent.com/104059932/215116509-7ccecb04-1684-4133-ba6a-9aac62ec49c6.png)
   과제 특이사항 중
 - update 가능한 Column : text, reward
 
