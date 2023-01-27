@@ -20,6 +20,8 @@ node 와 git 이 설치되어 있어야 합니다.
 
 node 및 git 이 설치되어 있는 경우 0-3으로 넘어가주세요.
 
+- 깃 설치 : 아래 url 로 접속하여 운영체제에 맞게 설치
+  https://git-scm.com/downloads
 - node 설치
 <details>
 <summary> 🪟 윈도우 에서 node & npm 설치 길라잡이 </summary>
@@ -54,8 +56,6 @@ node -v 했을때 v18.x.x 가 나오면 설치 성공!
 
 </details>
 
-- 깃 설치 : 아래 url 로 접속하여 운영체제에 맞게 설치
-  [https://git-scm.com/downloads](https://git-scm.com/downloads)
 
 ### 0-3 실행 하기
 
