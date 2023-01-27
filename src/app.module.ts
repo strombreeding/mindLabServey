@@ -12,6 +12,7 @@ import { QuestionModule } from './question/question.module';
 import { AnswerModule } from './answer/answer.module';
 import { QuestionService } from './question/question.service';
 import { AnswerService } from './answer/answer.service';
+import { UserAnswerModule } from './user-answer/user-answer.module';
 
 @Module({
   imports: [
@@ -24,6 +25,7 @@ import { AnswerService } from './answer/answer.service';
     SuccessModule,
     QuestionModule,
     AnswerModule,
+    UserAnswerModule,
   ],
   controllers: [AppController],
   providers: [AppService, ServeyService, QuestionService, AnswerService],

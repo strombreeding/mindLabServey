@@ -22,7 +22,7 @@ export class AnswerResolver {
   }
 
   @Mutation(() => Boolean)
-  async deleteAnswer(@Args('inputAnswerId') id: string) {
+  async deleteAnswer(@Args('inputAnswerId') id: number) {
     try {
       console.log(id);
       const newServey = await this.answerService.delete(id);
@@ -33,9 +33,9 @@ export class AnswerResolver {
     }
   }
 
-  @Mutation(() => Answer)
+  @Mutation(() => Boolean)
   async updateAnswer(@Args('toChange') updateAnswer: UpdateAnswerDto) {
-    const { reward, text, answerId } = updateAnswer;
+    const { reward, text, questionId, listNumber } = updateAnswer;
     console.log(updateAnswer);
     const toUpdate = {
       ...(reward && { reward }),
@@ -43,7 +43,11 @@ export class AnswerResolver {
     }; //
     console.log(toUpdate);
     try {
-      const newServey = await this.answerService.update(answerId, toUpdate);
+      const newServey = await this.answerService.update(
+        questionId,
+        listNumber,
+        toUpdate,
+      );
       return newServey;
     } catch (err) {
       console.log(err.message);

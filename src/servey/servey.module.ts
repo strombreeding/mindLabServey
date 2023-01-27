@@ -3,8 +3,8 @@ import { TypeOrmModule } from '@nestjs/typeorm';
 import { AnswerModule } from 'src/answer/answer.module';
 import { TypeOrmCustomModule } from 'src/configs/typeorm.customModule';
 import { QuestionModule } from 'src/question/question.module';
-import { QuestionService } from 'src/question/question.service';
 import { SuccessModule } from 'src/success/success.module';
+import { UserAnswerModule } from 'src/user-answer/user-answer.module';
 import { Servey } from './config/servey.entity';
 import { ServeyRepository } from './config/servey.repository';
 import { ServeysResolver } from './servey.resolver';
@@ -17,6 +17,7 @@ import { ServeyService } from './servey.service';
     forwardRef(() => QuestionModule),
     forwardRef(() => AnswerModule),
     forwardRef(() => SuccessModule),
+    forwardRef(() => UserAnswerModule),
   ],
   providers: [ServeyService, ServeysResolver],
   exports: [

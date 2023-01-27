@@ -45,7 +45,14 @@ export class SuccessResolver {
 
   @Query(() => [Success])
   async allSuccess() {
-    return await this.successService.getAll();
+    try {
+      const success = await this.successService.getAll();
+      console.log(success);
+      if (success.length <= 0) throw new ApolloError('설문 결과가 없습니다.');
+      return success;
+    } catch (err) {
+      throw new ApolloError(err.message);
+    }
   }
 
   @Query(() => Success)
@@ -68,6 +75,16 @@ export class SuccessResolver {
       const servey = await this.successService.getServey(success);
       // console.log('🐳', servey);
       return servey;
+    } catch (err) {
+      console.log(err.message);
+    }
+  }
+  @ResolveField()
+  async hasUserAnswers(@Parent() success: Success) {
+    try {
+      const userAnswer = await this.successService.getUserAnswer(success.id);
+      // console.log('🐳', servey);
+      return userAnswer;
     } catch (err) {
       console.log(err.message);
     }

@@ -6,6 +6,6 @@ export class CreateSuccessDto {
   serveyId: number;
 
   @Field(() => [String])
-  answerIdArr: string[];
+  answerArr: string[];
 }
 //

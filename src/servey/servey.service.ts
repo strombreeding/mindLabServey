@@ -7,6 +7,7 @@ import { Question } from 'src/question/config/question.entity';
 import { QuestionRepository } from 'src/question/config/question.repository';
 import { Success } from 'src/success/config/success.entity';
 import { SuccessRepository } from 'src/success/config/success.repository';
+import { UserAnswer } from 'src/user-answer/config/user-answer.entity';
 import { DataSource } from 'typeorm';
 import { Servey } from './config/servey.entity';
 import { ServeyRepository } from './config/servey.repository';
@@ -16,12 +17,6 @@ export class ServeyService {
   constructor(
     @InjectRepository(ServeyRepository)
     private serveyRepository: ServeyRepository,
-    @InjectRepository(QuestionRepository)
-    private questionRepository: QuestionRepository,
-    @InjectRepository(AnswerRepository)
-    private answerRepository: AnswerRepository,
-    @InjectRepository(SuccessRepository)
-    private successRepository: SuccessRepository,
     private dataSouce: DataSource,
   ) {}
   async getAll(): Promise<Servey[]> {
@@ -41,6 +36,7 @@ export class ServeyService {
     const length = await this.serveyRepository.find();
     servey.title = `제목 없는 설문지 ${length.length + 1}`;
     servey.description = '설문에 대한 설명을 해주세요.';
+    servey.isUsed = false;
     const newServey = await this.serveyRepository.save(servey);
     console.log('서비스로직 끝');
     return newServey;
@@ -50,6 +46,11 @@ export class ServeyService {
     const servey = await this.serveyRepository.findOne({
       where: { id: toChange.serveyId },
     });
+    if (!servey) throw new ApolloError('해당 설문이 존재하지 않습니다.');
+    if (servey.isUsed === true)
+      throw new ApolloError(
+        '한 번 이상 진행된 설문이기 떄문에 변경할 수 없습니다.',
+      );
     servey.title = toChange.title;
     servey.description = toChange.description;
     const update = await this.serveyRepository.save(servey);
@@ -64,41 +65,38 @@ export class ServeyService {
     await conn.startTransaction();
 
     try {
-      // 완료설문 삭제
       const success = await conn.manager.find(Success, {
         where: { serveyId: id },
       });
-      if (success.length > 0) {
-        console.log('success 삭제시작');
-        const deleteSuccess = await conn.manager.delete(Success, {
-          serveyId: id,
+      // 유저 응답들 삭제
+      for (let i = 0; i < success.length; i++) {
+        const userAnswer = await conn.manager.delete(UserAnswer, {
+          successId: success[i].id,
         });
-        console.log('success 삭제완료');
       }
+      console.log('gd');
+      // 완료설문 삭제
+      const deleteSuccess = await conn.manager.delete(Success, {
+        serveyId: id,
+      });
 
       // 설문의 질문들 찾아서 답변삭제 후 질문 삭제
       const hasQuestions = await conn.manager.find(Question, {
         where: { serveyId: id },
       });
       if (hasQuestions.length > 0) {
-        console.log('answer 삭제시작');
         for (let i = 0; i < hasQuestions.length; i++) {
           const deleteAnswer = await conn.manager.delete(Answer, {
             questionId: hasQuestions[i].id,
           });
         }
-        console.log('answer 삭제완료');
-        console.log('question 삭제시작');
         const deleteQuestion = await conn.manager.delete(Question, {
           serveyId: id,
         });
-        console.log('question 삭제완료');
       }
 
       // 설문 삭제
-      console.log('servey 삭제시작');
       const result = await conn.manager.delete(Servey, { id });
-      console.log('servey 삭제완료');
 
       await conn.commitTransaction();
       return true;

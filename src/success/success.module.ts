@@ -5,6 +5,7 @@ import { TypeOrmCustomModule } from 'src/configs/typeorm.customModule';
 import { QuestionModule } from 'src/question/question.module';
 import { ServeyModule } from 'src/servey/servey.module';
 import { ServeyService } from 'src/servey/servey.service';
+import { UserAnswerModule } from 'src/user-answer/user-answer.module';
 import { Success } from './config/success.entity';
 import { SuccessRepository } from './config/success.repository';
 import { SuccessResolver } from './success.resolver';
@@ -17,6 +18,7 @@ import { SuccessService } from './success.service';
     forwardRef(() => ServeyModule),
     forwardRef(() => AnswerModule),
     forwardRef(() => QuestionModule),
+    forwardRef(() => UserAnswerModule),
   ],
   providers: [SuccessService, SuccessResolver],
   exports: [

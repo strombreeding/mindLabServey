@@ -1,6 +1,7 @@
 import { Field, Int, ObjectType } from '@nestjs/graphql';
 import { Question } from 'src/question/config/question.entity';
 import { Servey } from 'src/servey/config/servey.entity';
+import { UserAnswer } from 'src/user-answer/config/user-answer.entity';
 import {
   Column,
   Entity,
@@ -9,27 +10,27 @@ import {
   PrimaryGeneratedColumn,
   Unique,
   PrimaryColumn,
+  OneToMany,
 } from 'typeorm';
 
 @ObjectType()
 @Entity()
-@Unique(['id'])
 export class Answer {
   @Field(() => String)
-  @PrimaryColumn()
-  id: string; // questionId-inputNumber
+  @PrimaryGeneratedColumn()
+  id: number; // questionId-inputNumber
 
   @Field()
   @Column()
   text: string;
 
   @Field()
-  @CreateDateColumn()
-  created: Date;
+  @Column()
+  reward: number;
 
   @Field()
   @Column()
-  reward: number;
+  listNumber: string;
 
   @Field()
   @Column({ nullable: false })

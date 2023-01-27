@@ -23,14 +23,9 @@ export class Question {
   text: string;
 
   @Field()
-  @CreateDateColumn()
-  created: Date;
-
-  @Field()
   @Column()
   isObjective: boolean;
 
-  @Field()
   @Column({ nullable: false })
   serveyId: number;
 

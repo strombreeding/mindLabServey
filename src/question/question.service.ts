@@ -19,8 +19,6 @@ export class QuestionService {
     private questionRepository: QuestionRepository,
     @Inject(forwardRef(() => ServeyService))
     private serveyService: ServeyService,
-    @Inject(forwardRef(() => SuccessService))
-    private successService: SuccessService,
     @InjectRepository(AnswerRepository)
     private answerRepository: AnswerRepository,
     private dataSource: DataSource,
@@ -50,7 +48,7 @@ export class QuestionService {
   async getAnswers(question: Question): Promise<Answer[]> {
     const answer = await this.answerRepository.find({
       where: { questionId: question.id },
-      order: { created: 'ASC' },
+      order: { listNumber: 'ASC' },
     });
     return answer;
   }
@@ -59,6 +57,12 @@ export class QuestionService {
     const question = await this.questionRepository.findOne({
       where: { id: toChange.questionId },
     });
+    const momServey = await this.serveyService.getOne(question.serveyId);
+    if (momServey.isUsed === true)
+      throw new ApolloError(
+        '한 번 이상 진행된 설문이라 내용을 변경할 수 없습니다.',
+      );
+
     question.text = toChange.text;
     const update = await this.questionRepository.save(question);
     return update;

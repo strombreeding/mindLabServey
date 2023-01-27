@@ -28,6 +28,10 @@ export class Servey {
   description: string;
 
   @Field()
+  @Column()
+  isUsed: boolean;
+
+  @Field()
   @CreateDateColumn()
   created: Date;
 

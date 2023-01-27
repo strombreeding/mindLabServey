@@ -2,17 +2,26 @@
 # THIS FILE WAS AUTOMATICALLY GENERATED (DO NOT MODIFY)
 # ------------------------------------------------------
 
+type UserAnswer {
+  id: Float!
+  userAnswers: String!
+  questionText: String!
+  answerText: String!
+  successId: Float!
+}
+
 type Success {
   id: Float!
   score: Int
-  serveyId: Int
   fromServey: Servey
+  hasUserAnswers: [UserAnswer!]!
 }
 
 type Servey {
   id: Float!
   title: String!
   description: String!
+  isUsed: Boolean!
   created: DateTime!
   hasQuestions: [Question!]
 }
@@ -25,17 +34,15 @@ scalar DateTime
 type Question {
   id: Int!
   text: String!
-  created: DateTime!
   isObjective: Boolean!
-  serveyId: Float!
   hasAnswers: [Answer!]
 }
 
 type Answer {
   id: String!
   text: String!
-  created: DateTime!
   reward: Float!
+  listNumber: String!
   questionId: Float!
 }
 
@@ -49,13 +56,13 @@ type Query {
 type Mutation {
   newServey: Servey!
   updateServey(toChange: UpdateServeyDto!): Servey!
-  deleteServey(deleteToServey: Float!): Boolean!
+  deleteServey(inputServeyId: Float!): Boolean!
   newQuestion(createQuestuinInput: CreateQuestionDto!): Question!
   updateQuestion(toChange: UpdateQuestionDto!): Question!
   deleteQuestion(inputQuestionId: Float!): Boolean!
   newAnswer(createAnswerInput: CreateAnswerDto!): Answer!
-  deleteAnswer(inputAnswerId: String!): Boolean!
-  updateAnswer(toChange: UpdateAnswerDto!): Answer!
+  deleteAnswer(inputAnswerId: Float!): Boolean!
+  updateAnswer(toChange: UpdateAnswerDto!): Boolean!
   serveySeccess(createSuccessDto: CreateSuccessDto!): Success!
   deleteSuccess(inputSerialNumber: Float!): Boolean!
 }
@@ -78,16 +85,16 @@ input UpdateQuestionDto {
 
 input CreateAnswerDto {
   questionId: Float!
-  reward: Float!
 }
 
 input UpdateAnswerDto {
-  answerId: String!
+  questionId: Float!
+  listNumber: String!
   text: String
   reward: Float
 }
 
 input CreateSuccessDto {
   serveyId: Float!
-  answerIdArr: [String!]!
+  answerArr: [String!]!
 }

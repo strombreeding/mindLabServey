@@ -76,7 +76,7 @@ export class ServeysResolver {
   }
 
   @Mutation(() => Boolean)
-  async deleteServey(@Args('deleteToServey') serveyId: number) {
+  async deleteServey(@Args('inputServeyId') serveyId: number) {
     try {
       const remove = await this.serveyService.delete(serveyId);
       return remove;

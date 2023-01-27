@@ -4,8 +4,5 @@ import { Field, InputType } from '@nestjs/graphql';
 export class CreateAnswerDto {
   @Field()
   questionId: number;
-
-  @Field()
-  reward: number;
 }
 //
