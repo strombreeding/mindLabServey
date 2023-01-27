@@ -85,26 +85,27 @@ node -v 했을때 v18.x.x 가 나오면 설치 성공!
      ```
 
 - Windows 환경에서 실행하는 법
-  윈도우키 + R 을 누르고, cmd 검색후 실행.
-  실행 후 아래 명령어들 차례로 실행
-  ```graphql
-  git clone https://github.com/strombreeding/mindLabServey.git
-  ```
-  ```graphql
-  cd mindLabServey
-  ```
-  ```graphql
-  npm ci
-  ```
-  ```graphql
-  npm start
-  ```
+
+  1. 윈도우키 + R 을 누르고, cmd 검색후 실행
+  2. 실행 후 아래 명령어들 차례로 실행
+     붙여넣기가 안될시 쉬프트 + Insert 키
+     
+    ```graphql
+    git clone https://github.com/strombreeding/mindLabServey.git
+    ```
+    ```graphql
+    cd mindLabServey
+    ```
+    ```graphql
+    npm ci
+    ```
+    ```graphql
+    npm start
+    ```
 
 ### 0-4 정상적으로 실행이 되었을때
 
-```graphql
 ![image](https://user-images.githubusercontent.com/104059932/215104923-cead0afe-3f80-4d2a-b3fd-9087bb9c9b79.png)
-```
 
 ## 1. CRUD 시나리오
 
