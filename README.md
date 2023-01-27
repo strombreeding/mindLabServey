@@ -1,5 +1,3 @@
-# 목차
-
 ## 0. MainLab Info
 
 ### 0-1 사용 스택 및 개발 환경
@@ -23,40 +21,38 @@ node 와 git 이 설치되어 있어야 합니다.
 node 및 git 이 설치되어 있는 경우 0-3으로 넘어가주세요.
 
 - node 설치
-  - 윈도우
-      <details>
-      <summary> 🪟 윈도우 에서 node & npm 설치 길라잡이 </summary>
-      <div markdown="2">
-      <h3>1. 아래 주소로 들어가서 node 를 설치 합니다. </h3>
-      <p>[https://nodejs.org/ko/](https://nodejs.org/ko/)</p>
-      
-      <h3>2. 윈도우키 + R 을 누르고 cmd 입력 후 실행</h3>
-      
-      <p> 아래 명령어 입력 후, v18.x.x 가 나온다면 성공입니다! </p>
-      
-      </div>
-      
-      </details>
+<details>
+<summary> 🪟 윈도우 에서 node & npm 설치 길라잡이 </summary>
+<div markdown="2">
+<h3>1. 아래 주소로 들어가서 node 를 설치 합니다. </h3>
+<p>[https://nodejs.org/ko/](https://nodejs.org/ko/)</p>
 
-  - 맥
-      <details>
-      <summary> 🍏 맥 에서 node & npm 설치하기 </summary>
-      <div markdown="2">
-      <h3>1. 아래 주소로 들어가서 node를 설치합니다</h3>
-      <p>[https://nodejs.org/ko/](https://nodejs.org/ko/)</p>
-      
-      <h3>2. 커맨드 + 스페이스 을 누르고 terminal 입력 후 실행</h3>
-      
-      ```
-      node -v
-      
-      ```
-      
-      node -v 했을때 v18.x.x 가 나오면 설치 성공!
-      
-      </div>
-      
-      </details>
+<h3>2. 윈도우키 + R 을 누르고 cmd 입력 후 실행</h3>
+
+<p> 아래 명령어 입력 후, v18.x.x 가 나온다면 성공입니다! </p>
+
+</div>
+
+</details>
+
+<details>
+<summary> 🍏 맥 에서 node & npm 설치하기 </summary>
+<div markdown="2">
+<h3>1. 아래 주소로 들어가서 node를 설치합니다</h3>
+<p>[https://nodejs.org/ko/](https://nodejs.org/ko/)</p>
+
+<h3>2. 커맨드 + 스페이스 을 누르고 terminal 입력 후 실행</h3>
+
+```
+node -v
+
+```
+
+node -v 했을때 v18.x.x 가 나오면 설치 성공!
+
+</div>
+
+</details>
 
 - 깃 설치 : 아래 url 로 접속하여 운영체제에 맞게 설치
   [https://git-scm.com/downloads](https://git-scm.com/downloads)
@@ -86,10 +82,6 @@ node 및 git 이 설치되어 있는 경우 0-3으로 넘어가주세요.
 
      ```graphql
      npm start
-     ```
-
-     ```graphql
-     ![image](https://user-images.githubusercontent.com/104059932/215104923-cead0afe-3f80-4d2a-b3fd-9087bb9c9b79.png)
      ```
 
 - Windows 환경에서 실행하는 법
