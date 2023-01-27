@@ -18,7 +18,9 @@ export class SuccessResolver {
 
   @Mutation(() => Success)
   async serveySeccess(
-    @Args('createSuccessDto') createSuccessDto: CreateSuccessDto,
+    @Args('inputServeyIdAndListNumberOrUserAnswer')
+    createSuccessDto: CreateSuccessDto,
+    //
   ) {
     try {
       console.log(createSuccessDto);

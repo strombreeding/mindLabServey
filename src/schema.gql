@@ -63,7 +63,7 @@ type Mutation {
   newAnswer(createAnswerInput: CreateAnswerDto!): Answer!
   deleteAnswer(inputAnswerId: Float!): Boolean!
   updateAnswer(toChange: UpdateAnswerDto!): Boolean!
-  serveySeccess(createSuccessDto: CreateSuccessDto!): Success!
+  serveySeccess(inputServeyIdAndListNumberOrUserAnswer: CreateSuccessDto!): Success!
   deleteSuccess(inputSerialNumber: Float!): Boolean!
 }
 
