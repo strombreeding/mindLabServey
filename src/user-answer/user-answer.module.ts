@@ -2,7 +2,6 @@ import { forwardRef, Module } from '@nestjs/common';
 import { AnswerModule } from 'src/answer/answer.module';
 import { QuestionModule } from 'src/question/question.module';
 import { ServeyModule } from 'src/servey/servey.module';
-import { UserAnswerService } from './user-answer.service';
 import { SuccessModule } from '../success/success.module';
 import { TypeOrmCustomModule } from 'src/configs/typeorm.customModule';
 import { TypeOrmModule } from '@nestjs/typeorm';
@@ -18,11 +17,10 @@ import { UserAnswerResolver } from './user-answer.resolver';
     forwardRef(() => QuestionModule),
     forwardRef(() => SuccessModule),
   ],
-  providers: [UserAnswerService, UserAnswerResolver],
+  providers: [UserAnswerResolver],
   exports: [
     TypeOrmModule.forFeature([UserAnswer]),
     TypeOrmCustomModule.forCustomRepository([UserAnswerRepository]),
-    UserAnswerService,
   ],
 })
 export class UserAnswerModule {}

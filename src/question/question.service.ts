@@ -6,6 +6,7 @@ import { AnswerRepository } from 'src/answer/config/answer.repository';
 import { ServeyService } from 'src/servey/servey.service';
 import { Success } from 'src/success/config/success.entity';
 import { SuccessService } from 'src/success/success.service';
+import { CustomError } from 'src/utils/error';
 import { DataSource, Repository } from 'typeorm';
 import { CreateQuestionDto } from './config/create.dto';
 import { Question } from './config/question.entity';
@@ -37,8 +38,9 @@ export class QuestionService {
     const servey = await this.serveyService.getOne(data.fromServeyId);
     if (!servey) throw new ApolloError('존재하지 않는 설문입니다.');
     if (servey.isUsed === true)
-      throw new ApolloError(
+      throw new CustomError(
         '이미 한번 이상 응답된 설문지 입니다. 수정 및 삭제할 수 없습니다.',
+        400,
       );
     const question = new Question();
     question.fromServey = servey;
@@ -63,8 +65,9 @@ export class QuestionService {
     });
     const momServey = await this.serveyService.getOne(question.serveyId);
     if (momServey.isUsed === true)
-      throw new ApolloError(
+      throw new CustomError(
         '이미 한번 이상 응답된 설문지 입니다. 수정 및 삭제할 수 없습니다.',
+        400,
       );
 
     question.text = toChange.text;
@@ -74,11 +77,12 @@ export class QuestionService {
 
   async delete(id: number, serveyId?: number): Promise<true> {
     const question = await this.questionRepository.findOne({ where: { id } });
-    if (!question) throw new ApolloError('존재하지 않는 설문 입니다.');
+    if (!question) throw new CustomError('존재하지 않는 설문 입니다.', 404);
     const momServey = await this.serveyService.getOne(question.serveyId);
     if (momServey.isUsed === true)
-      throw new ApolloError(
+      throw new CustomError(
         '이미 한번 이상 응답된 설문지 입니다. 수정 및 삭제할 수 없습니다.',
+        400,
       );
     const conn = this.dataSource.createQueryRunner();
     await conn.connect();
@@ -92,8 +96,8 @@ export class QuestionService {
       return true;
     } catch (err) {
       await conn.rollbackTransaction();
-      console.log(err.message);
-      throw new ApolloError(err);
+      if (!err.extentions) throw new Error(err);
+      throw new CustomError(err.message, 500);
     } finally {
       await conn.release();
     }

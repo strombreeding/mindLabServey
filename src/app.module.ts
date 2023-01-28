@@ -13,11 +13,9 @@ import { AnswerModule } from './answer/answer.module';
 import { QuestionService } from './question/question.service';
 import { AnswerService } from './answer/answer.service';
 import { UserAnswerModule } from './user-answer/user-answer.module';
-import { LoggerMiddleware } from './logger/logger.middleware';
+import { LoggerMiddleware } from './middleware/logger.middleware';
 import { WinstonModule } from 'nest-winston';
 import { winstonLogger } from './utils/winston.util';
-import { ServeysResolver } from './servey/servey.resolver';
-import { LoggerModule } from './logger/logger.module';
 @Module({
   imports: [
     TypeOrmModule.forRoot(typeORMConfig),
@@ -25,8 +23,7 @@ import { LoggerModule } from './logger/logger.module';
       driver: ApolloDriver,
       autoSchemaFile: 'src/schema.gql',
     }),
-    // WinstonModule.forRoot(winstonLogger),
-    LoggerModule,
+    WinstonModule.forRoot(winstonLogger),
     ServeyModule,
     SuccessModule,
     QuestionModule,
@@ -37,9 +34,9 @@ import { LoggerModule } from './logger/logger.module';
   controllers: [AppController],
   providers: [AppService, ServeyService, QuestionService, AnswerService],
 })
-export class AppModule {}
-// export class AppModule implements NestModule {
-//   configure(consumer: MiddlewareConsumer) {
-//     consumer.apply(LoggerMiddleware).forRoutes('*');
-//   }
-// }
+// export class AppModule {}
+export class AppModule implements NestModule {
+  configure(consumer: MiddlewareConsumer) {
+    consumer.apply(LoggerMiddleware).forRoutes('*');
+  }
+}

@@ -9,5 +9,5 @@ export const typeORMConfig: TypeOrmModuleOptions = {
   database: 'servey',
 
   entities: [__dirname + '/../**/*.entity.{js,ts}'],
-  // synchronize: true,
+  // synchronize: true, // 자동 테이블 생성임. 엔티티 수정이 끝나면 꺼야함
 };

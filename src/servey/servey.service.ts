@@ -8,7 +8,7 @@ import { QuestionRepository } from 'src/question/config/question.repository';
 import { Success } from 'src/success/config/success.entity';
 import { SuccessRepository } from 'src/success/config/success.repository';
 import { UserAnswer } from 'src/user-answer/config/user-answer.entity';
-import { CustomError } from 'src/utils/error';
+import { CustomError, errorLog } from 'src/utils/error';
 import { DataSource } from 'typeorm';
 import { Servey } from './config/servey.entity';
 import { ServeyRepository } from './config/servey.repository';
@@ -45,11 +45,12 @@ export class ServeyService {
     return newServey;
   }
 
+  // 겹치는 title 일때 오류처리 해야함. 하지만 에러로그를 확인하기 위해서 남겨둠.
   async changeTitle(toChange: UpdateServeyDto): Promise<Servey> {
     const servey = await this.serveyRepository.findOne({
       where: { id: toChange.serveyId },
     });
-    if (!servey) throw new ApolloError('존재하지 않는 설문입니다.');
+    if (!servey) throw new CustomError('존재하지 않는 설문입니다.', 404);
     if (servey.isUsed === true)
       throw new CustomError(
         '이미 한번 이상 응답된 설문지 입니다. 수정할 수 없습니다.',
@@ -103,9 +104,10 @@ export class ServeyService {
       await conn.commitTransaction();
       return true;
     } catch (err) {
-      console.log(err.message);
-
       await conn.rollbackTransaction();
+      if (!err.extentions) {
+        throw new Error(err);
+      }
       throw new CustomError(err.message, 500);
     } finally {
       await conn.release();

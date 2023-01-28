@@ -3,6 +3,7 @@ import { InjectRepository } from '@nestjs/typeorm';
 import { ApolloError } from 'apollo-server-express';
 import { QuestionRepository } from 'src/question/config/question.repository';
 import { ServeyRepository } from 'src/servey/config/servey.repository';
+import { CustomError } from 'src/utils/error';
 import { Answer } from './config/answer.entity';
 import { AnswerRepository } from './config/answer.repository';
 import { CreateAnswerDto } from './config/create.dto';
@@ -35,15 +36,16 @@ export class AnswerService {
     });
     if (question === null) throw new ApolloError('존재하지 않는 문항입니다.');
     if (question.isObjective === false)
-      throw new ApolloError('해당 문항은 객관식이 아닙니다.');
+      throw new CustomError('해당 문항은 객관식이 아닙니다.', 400);
     const answers = await this.answerRepository.find({
       where: { questionId },
     });
     if (answers.length === 10)
-      throw new ApolloError('한 문항에 답변은 10개 이하로 해야합니다.');
+      throw new CustomError('한 문항에 답변은 10개 이하로 해야합니다.', 400);
     if (materServey.isUsed === true)
-      throw new ApolloError(
+      throw new CustomError(
         '이미 한번 이상 응답된 설문지 입니다. 수정 및 삭제할 수 없습니다.',
+        400,
       );
 
     const listNumber = String(answers.length + 1);
@@ -72,8 +74,9 @@ export class AnswerService {
       where: { id: momQuestion.serveyId },
     });
     if (materServey.isUsed === true)
-      throw new ApolloError(
+      throw new CustomError(
         '이미 한번 이상 응답된 설문지 입니다. 수정 및 삭제할 수 없습니다.',
+        400,
       );
     //
     const updateing = await this.answerRepository.update(answer, toUpdate);
@@ -82,7 +85,7 @@ export class AnswerService {
 
   async delete(id: number): Promise<true> {
     const answer = await this.answerRepository.findOne({ where: { id } });
-    if (!answer) throw new ApolloError('존재하지 않는 답변입니다.');
+    if (!answer) throw new CustomError('존재하지 않는 답변입니다.', 404);
 
     const momQuestion = await this.questionRepository.findOne({
       where: { id: answer.questionId },
@@ -91,8 +94,9 @@ export class AnswerService {
       where: { id: momQuestion.serveyId },
     });
     if (materServey.isUsed === true)
-      throw new ApolloError(
+      throw new CustomError(
         '이미 한번 이상 응답된 설문지 입니다. 수정 및 삭제할 수 없습니다.',
+        400,
       );
     await this.answerRepository.delete({ id });
     return true;

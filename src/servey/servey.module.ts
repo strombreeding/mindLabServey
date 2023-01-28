@@ -3,7 +3,7 @@ import { TypeOrmModule } from '@nestjs/typeorm';
 import { AnswerModule } from 'src/answer/answer.module';
 import { AppModule } from 'src/app.module';
 import { TypeOrmCustomModule } from 'src/configs/typeorm.customModule';
-import { LoggerMiddleware } from 'src/logger/logger.middleware';
+import { LoggerMiddleware } from 'src/middleware/logger.middleware';
 import { QuestionModule } from 'src/question/question.module';
 import { SuccessModule } from 'src/success/success.module';
 import { UserAnswerModule } from 'src/user-answer/user-answer.module';

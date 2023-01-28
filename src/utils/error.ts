@@ -37,8 +37,7 @@ export class CustomError {
   }
 }
 export const errorLog = (err: any, logger: any, req: Request) => {
-  if (err.extensions.code) {
-    console.log(err.extensions.code);
+  if (!err.extensions !== true) {
     if (!errorCode.includes(err.extensions.code)) {
       logger.error(
         err.message,
@@ -53,7 +52,7 @@ export const errorLog = (err: any, logger: any, req: Request) => {
       { path: __filename, clientOs: req.body.os },
       new Date(),
     );
-    throw new ApolloError(err.message);
+    throw new ApolloError('서버 오류');
   }
 };
 // export const customError = (code: number, message: string) => {

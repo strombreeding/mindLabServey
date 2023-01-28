@@ -1,3 +1,5 @@
+import { Request } from 'express';
+
 /**
  *
  */
@@ -9,9 +11,17 @@ export const randomNumber = () => {
   );
 };
 
+export const getWorkLog = (req: Request) => {
+  const result = req.body.query
+    .replace(/^\s+|\s+$/gm, '')
+    .replace(/\n/gm, '')
+    .split(' ')[0]
+    .replace('{', '');
+  return result;
+};
+
 export const getClientOs = (userAgent: string) => {
   const compare = userAgent.toLowerCase();
-  // let userAgent = '';
   if (compare.indexOf('windows') > -1) {
     userAgent = 'Windows';
   } else if (compare.indexOf('iphone') > -1) {
