@@ -83,7 +83,7 @@ node -v 했을때 v18.x.x 가 나오면 설치 성공!
         ```
         
         ```
-        git clone <https://github.com/strombreeding/mindLabServey.git>
+        git clone https://github.com/strombreeding/mindLabServey.git
         
         ```
         
