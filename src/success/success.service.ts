@@ -50,15 +50,16 @@ export class SuccessService {
     const servey = await this.serveyRepository.findOne({
       where: { id: serveyId },
     });
-    if (!servey)
-      throw new ApolloError('해당 설문은 존재하지 않습니다.', 'BAD_USER_INPUT');
+    if (!servey) throw new ApolloError('존재하지 않는 설문입니다.');
 
     const questions = await this.questionRepository.find({
       where: { serveyId },
       order: { id: 'ASC' },
     });
     if (questions.length === 0)
-      throw new ApolloError('해당 설문에는 질문이 없어서 채점이 불가능합니다.');
+      throw new ApolloError(
+        '해당 설문에 귀속된 질문이 없습니다. 응답이 불가능합니다.',
+      );
 
     // 설문의 문항과 객관식 문항의 개수
     // let objectiveQuestionLength = 0;

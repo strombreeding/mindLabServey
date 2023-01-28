@@ -35,7 +35,11 @@ export class QuestionService {
   async create(data: CreateQuestionDto): Promise<Question> {
     const { fromServeyId, isObjective } = data;
     const servey = await this.serveyService.getOne(data.fromServeyId);
-    if (!servey) throw new ApolloError('해당 설문이 없습니다.');
+    if (!servey) throw new ApolloError('존재하지 않는 설문입니다.');
+    if (servey.isUsed === true)
+      throw new ApolloError(
+        '이미 한번 이상 응답된 설문지 입니다. 수정 및 삭제할 수 없습니다.',
+      );
     const question = new Question();
     question.fromServey = servey;
     question.serveyId = fromServeyId;
@@ -60,7 +64,7 @@ export class QuestionService {
     const momServey = await this.serveyService.getOne(question.serveyId);
     if (momServey.isUsed === true)
       throw new ApolloError(
-        '한 번 이상 진행된 설문이라 내용을 변경할 수 없습니다.',
+        '이미 한번 이상 응답된 설문지 입니다. 수정 및 삭제할 수 없습니다.',
       );
 
     question.text = toChange.text;
@@ -70,14 +74,18 @@ export class QuestionService {
 
   async delete(id: number, serveyId?: number): Promise<true> {
     const question = await this.questionRepository.findOne({ where: { id } });
-    if (!question) throw new ApolloError('해당 id의 질문은 없습니다.');
+    if (!question) throw new ApolloError('존재하지 않는 문항입니다.');
+    const momServey = await this.serveyService.getOne(question.serveyId);
+    if (momServey.isUsed === true)
+      throw new ApolloError(
+        '이미 한번 이상 응답된 설문지 입니다. 수정 및 삭제할 수 없습니다.',
+      );
     const conn = this.dataSource.createQueryRunner();
     await conn.connect();
     await conn.startTransaction();
     try {
       await Promise.all([
-        conn.manager.delete(Success, { id: 60535410616871 }),
-        conn.manager.delete(Answer, { questionId: 123 }),
+        conn.manager.delete(Answer, { questionId: id }),
         conn.manager.delete(Question, { id }),
         conn.commitTransaction(),
       ]);

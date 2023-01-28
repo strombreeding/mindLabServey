@@ -46,10 +46,10 @@ export class ServeyService {
     const servey = await this.serveyRepository.findOne({
       where: { id: toChange.serveyId },
     });
-    if (!servey) throw new ApolloError('해당 설문이 존재하지 않습니다.');
+    if (!servey) throw new ApolloError('존재하지 않는 설문입니다.');
     if (servey.isUsed === true)
       throw new ApolloError(
-        '한 번 이상 진행된 설문이기 떄문에 변경할 수 없습니다.',
+        '이미 한번 이상 응답된 설문지 입니다. 수정할 수 없습니다.',
       );
     servey.title = toChange.title;
     servey.description = toChange.description;
