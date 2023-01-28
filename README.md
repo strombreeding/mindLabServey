@@ -22,21 +22,21 @@ node 및 git 이 설치되어 있는 경우 0-3으로 넘어가주세요.
 - 깃 설치 : 아래 url 로 접속하여 운영체제에 맞게 설치
   [https://git-scm.com/downloads](https://git-scm.com/downloads)
 - node 설치
-<details>
-<summary> 🪟 윈도우 에서 node & npm 설치 길라잡이 </summary>
-<div markdown="2">
-<h3>1. 아래 주소로 들어가서 node 를 설치 합니다. </h3>
-<p>[https://nodejs.org/ko/](https://nodejs.org/ko/)</p>
-    
+  <details>
+  <summary> 🪟 윈도우 에서 node & npm 설치 길라잡이 </summary>
+  <div markdown="2">
+  <h3>1. 아래 주소로 들어가서 node 를 설치 합니다. </h3>
+  <p>[https://nodejs.org/ko/](https://nodejs.org/ko/)</p>
+      
     <h3>2. 윈도우키 + R 을 누르고 cmd 입력 후 실행</h3>
+      
+      <p> 아래 명령어 입력 후, v18.x.x 가 나온다면 성공입니다! </p>
+      
+      </div>
+      
+  </details>
     
-    <p> 아래 명령어 입력 후, v18.x.x 가 나온다면 성공입니다! </p>
-    
-    </div>
-    
-    </details>
-    
-    <details>
+  <details>
     <summary> 🍏 맥 에서 node & npm 설치하기 </summary>
     <div markdown="2">
     <h3>1. 아래 주소로 들어가서 node를 설치합니다</h3>
@@ -53,12 +53,12 @@ node 및 git 이 설치되어 있는 경우 0-3으로 넘어가주세요.
     
     </div>
     
-    </details>
-
+  </details>
 
 ### 1-3 실행 하기
 
 - MacBook 환경에서 실행하기
+
   1. CMD + 스페이스바 입력 후, terminal 입력 후 엔터
   2. 아래 명령어 복사후 붙여넣기
 
@@ -90,11 +90,12 @@ node 및 git 이 설치되어 있는 경우 0-3으로 넘어가주세요.
 <br>
 
 - Windows 환경에서 실행하는 법
+
   1.  윈도우키 + R 을 누르고, cmd 검색후 실행
   2.  실행 후 아래 명령어들 차례로 실행
       붙여넣기가 안될시 쉬프트 + Insert 키
-          ```
-          git clone <https://github.com/strombreeding/mindLabServey.git>
+      ```
+      git clone <https://github.com/strombreeding/mindLabServey.git>
 
           ```
 
