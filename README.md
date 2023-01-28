@@ -38,7 +38,7 @@ node 및 git 이 설치되어 있는 경우 0-3으로 넘어가주세요.
 <summary> 🪟 윈도우 에서 node & npm 설치 길라잡이 </summary>
 <div markdown="2">
 <h3>1. 아래 주소로 들어가서 node 를 설치 합니다. </h3>
-<p>[https://nodejs.org/ko/download/](https://nodejs.org/ko/download/)</p>
+<p>https://nodejs.org/ko/download/</p>
     
 <h3>2. 윈도우키 + R 을 누르고 cmd 입력 후 실행</h3>
 
@@ -55,7 +55,7 @@ node 및 git 이 설치되어 있는 경우 0-3으로 넘어가주세요.
 <summary> 🍏 맥 에서 node & npm 설치하기 </summary>
 <div markdown="2">
 <h3>1. 아래 주소로 들어가서 node를 설치합니다</h3>
-<p>[https://nodejs.org/ko/download/](https://nodejs.org/ko/download/)</p>
+<p>https://nodejs.org/ko/download/</p>
   
 <h3>2. 커맨드 + 스페이스 을 누르고 terminal 입력 후 실행</h3>
   
