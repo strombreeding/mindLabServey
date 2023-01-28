@@ -20,6 +20,8 @@ node 와 git 이 설치되어 있어야 합니다.
 
 node 및 git 이 설치되어 있는 경우 0-3으로 넘어가주세요.
 
+- 깃 설치 : 아래 url 로 접속하여 운영체제에 맞게 설치
+  https://git-scm.com/downloads
 - node 설치
 <details>
 <summary> 🪟 윈도우 에서 node & npm 설치 길라잡이 </summary>
@@ -54,8 +56,6 @@ node -v 했을때 v18.x.x 가 나오면 설치 성공!
 
 </details>
 
-- 깃 설치 : 아래 url 로 접속하여 운영체제에 맞게 설치
-  [https://git-scm.com/downloads](https://git-scm.com/downloads)
 
 ### 0-3 실행 하기
 
@@ -85,26 +85,32 @@ node -v 했을때 v18.x.x 가 나오면 설치 성공!
      ```
 
 - Windows 환경에서 실행하는 법
-  윈도우키 + R 을 누르고, cmd 검색후 실행.
-  실행 후 아래 명령어들 차례로 실행
-  ```graphql
-  git clone https://github.com/strombreeding/mindLabServey.git
-  ```
-  ```graphql
-  cd mindLabServey
-  ```
-  ```graphql
-  npm ci
-  ```
-  ```graphql
-  npm start
-  ```
+
+  1. 윈도우키 + R 을 누르고, cmd 검색후 실행
+  2. 실행 후 아래 명령어들 차례로 실행
+     붙여넣기가 안될시 쉬프트 + Insert 키
+     
+      ```graphql
+      git clone https://github.com/strombreeding/mindLabServey.git
+      ```
+      ```graphql
+      cd mindLabServey
+      ```
+      ```graphql
+      npm ci
+      ```
+      ```graphql
+      npm start
+      ```
 
 ### 0-4 정상적으로 실행이 되었을때
 
-```graphql
 ![image](https://user-images.githubusercontent.com/104059932/215104923-cead0afe-3f80-4d2a-b3fd-9087bb9c9b79.png)
-```
+
+<br>
+<br>
+
+
 
 ## 1. CRUD 시나리오
 
@@ -175,7 +181,7 @@ mutation {
 - 선택지의 순서는 listNumber 입니다
 - 한 문항에 최대 10개 까지 답변(선택지)를 등록할 수 있습니다.
 - reward 는 해당 답변을 선택했을때 오르게 될 점수 입니다. 기본값 0
-  ![과제 특이사항 중](https://s3-us-west-2.amazonaws.com/secure.notion-static.com/1022327c-ad55-4bb5-b687-d0f80c4a7fa1/Untitled.png)
+  ![image](https://user-images.githubusercontent.com/104059932/215116509-7ccecb04-1684-4133-ba6a-9aac62ec49c6.png)
   과제 특이사항 중
 - update 가능한 Column : text, reward
 
