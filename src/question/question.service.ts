@@ -74,7 +74,7 @@ export class QuestionService {
 
   async delete(id: number, serveyId?: number): Promise<true> {
     const question = await this.questionRepository.findOne({ where: { id } });
-    if (!question) throw new ApolloError('존재하지 않는 문항입니다.');
+    if (!question) throw new ApolloError('존재하지 않는 설문 입니다.');
     const momServey = await this.serveyService.getOne(question.serveyId);
     if (momServey.isUsed === true)
       throw new ApolloError(

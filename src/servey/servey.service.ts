@@ -8,6 +8,7 @@ import { QuestionRepository } from 'src/question/config/question.repository';
 import { Success } from 'src/success/config/success.entity';
 import { SuccessRepository } from 'src/success/config/success.repository';
 import { UserAnswer } from 'src/user-answer/config/user-answer.entity';
+import { CustomError } from 'src/utils/error';
 import { DataSource } from 'typeorm';
 import { Servey } from './config/servey.entity';
 import { ServeyRepository } from './config/servey.repository';
@@ -20,14 +21,17 @@ export class ServeyService {
     private dataSouce: DataSource,
   ) {}
   async getAll(): Promise<Servey[]> {
-    return await this.serveyRepository.find();
+    const serveies = await this.serveyRepository.find();
+    if (serveies.length === 0)
+      throw new CustomError('설문이 존재하지 않습니다.', 404);
+    return serveies;
   }
 
   async getOne(id: number): Promise<Servey> {
     const servey = await this.serveyRepository.findOne({
       where: { id },
-      // relations: ['success', 'hasQuestions'],
     });
+    if (!servey) throw new CustomError('존재하지 않는 설문입니다.', 404);
     return servey;
   }
 
@@ -38,7 +42,6 @@ export class ServeyService {
     servey.description = '설문에 대한 설명을 해주세요.';
     servey.isUsed = false;
     const newServey = await this.serveyRepository.save(servey);
-    console.log('서비스로직 끝');
     return newServey;
   }
 
@@ -48,8 +51,9 @@ export class ServeyService {
     });
     if (!servey) throw new ApolloError('존재하지 않는 설문입니다.');
     if (servey.isUsed === true)
-      throw new ApolloError(
+      throw new CustomError(
         '이미 한번 이상 응답된 설문지 입니다. 수정할 수 없습니다.',
+        400,
       );
     servey.title = toChange.title;
     servey.description = toChange.description;
@@ -57,9 +61,8 @@ export class ServeyService {
     return update;
   }
   async delete(id: number): Promise<true> {
-    console.log('들어옴 ㅎㅇㅎㅇ');
     const servey = await this.serveyRepository.findOne({ where: { id } });
-    if (!servey) throw new ApolloError('존재하지 않는 설문입니다.');
+    if (!servey) throw new CustomError('존재하지 않는 설문입니다.', 404);
     const conn = this.dataSouce.createQueryRunner();
     await conn.connect();
     await conn.startTransaction();
@@ -74,7 +77,6 @@ export class ServeyService {
           successId: success[i].id,
         });
       }
-      console.log('gd');
       // 완료설문 삭제
       const deleteSuccess = await conn.manager.delete(Success, {
         serveyId: id,
@@ -104,7 +106,7 @@ export class ServeyService {
       console.log(err.message);
 
       await conn.rollbackTransaction();
-      throw new ApolloError(err);
+      throw new CustomError(err.message, 500);
     } finally {
       await conn.release();
     }
