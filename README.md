@@ -26,7 +26,7 @@ node 및 git 이 설치되어 있는 경우 0-3으로 넘어가주세요.
   <summary> 🪟 윈도우 에서 node & npm 설치 길라잡이 </summary>
   <div markdown="2">
   <h3>1. 아래 주소로 들어가서 node 를 설치 합니다. </h3>
-  <p>[https://nodejs.org/ko/](https://nodejs.org/ko/)</p>
+  <p>https://nodejs.org/ko/download/</p>
       
     <h3>2. 윈도우키 + R 을 누르고 cmd 입력 후 실행</h3>
       
@@ -40,7 +40,7 @@ node 및 git 이 설치되어 있는 경우 0-3으로 넘어가주세요.
     <summary> 🍏 맥 에서 node & npm 설치하기 </summary>
     <div markdown="2">
     <h3>1. 아래 주소로 들어가서 node를 설치합니다</h3>
-    <p>[https://nodejs.org/ko/](https://nodejs.org/ko/)</p>
+    <p>https://nodejs.org/ko/download/</p>
     
     <h3>2. 커맨드 + 스페이스 을 누르고 terminal 입력 후 실행</h3>
     
@@ -94,7 +94,8 @@ node 및 git 이 설치되어 있는 경우 0-3으로 넘어가주세요.
   1.  윈도우키 + R 을 누르고, cmd 검색후 실행
   2.  실행 후 아래 명령어들 차례로 실행
       붙여넣기가 안될시 쉬프트 + Insert 키
-      ```
+
+      ````
       git clone <https://github.com/strombreeding/mindLabServey.git>
 
           ```
@@ -113,6 +114,7 @@ node 및 git 이 설치되어 있는 경우 0-3으로 넘어가주세요.
           npm start
 
           ```
+      ````
 
 ### 1-4 정상적으로 실행이 되었을때
 
@@ -128,7 +130,10 @@ node 및 git 이 설치되어 있는 경우 0-3으로 넘어가주세요.
 
 ## 2. DB테이블 설계
 
-### 🧑🏻‍🚀🧑🏻‍🚀🧑🏻‍🚀🧑🏻‍🚀🧑🏻‍🚀🧑🏻‍🚀🧑🏻‍🚀🧑🏻‍🚀🧑🏻‍🚀🧑🏻‍🚀🧑🏻‍🚀🧑🏻‍🚀🧑🏻‍🚀🧑🏻‍🚀🧑🏻‍🚀🧑🏻‍🚀🧑🏻‍🚀
+|                                                                                                                  |                                                                                                                  |
+| ---------------------------------------------------------------------------------------------------------------- | ---------------------------------------------------------------------------------------------------------------- |
+| ![image](https://user-images.githubusercontent.com/104059932/215240961-9d135e6f-3dea-4e2d-816e-ee89fc8c950e.png) | ![image](https://user-images.githubusercontent.com/104059932/215240954-e9076d5a-4ecd-4064-a711-3179c25a720a.png) |
+| 설문지 관계도                                                                                                    | 메인 페이지(2)                                                                                                   |
 
 <br>
 
@@ -175,7 +180,9 @@ node 및 git 이 설치되어 있는 경우 0-3으로 넘어가주세요.
 - 한 문항에 최대 10개 까지 답변(선택지)를 등록할 수 있습니다.
 - reward 는 해당 답변을 선택했을때 오르게 될 점수 입니다. 기본값 0
 - 과제 특이사항 을 만족시키기 위한 테이블 입니다.
+
   ![https://user-images.githubusercontent.com/104059932/215116509-7ccecb04-1684-4133-ba6a-9aac62ec49c6.png](https://user-images.githubusercontent.com/104059932/215116509-7ccecb04-1684-4133-ba6a-9aac62ec49c6.png)
+
 - update 가능한 Column : text, reward
 
 ### 2-3 완료설문 Success
