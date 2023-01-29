@@ -73,30 +73,30 @@ node -v 했을때 v18.x.x 가 나오면 설치 성공!
     1. CMD + 스페이스바 입력 후, terminal 입력 후 엔터
     2. 아래 명령어 복사후 붙여넣기
         
-        ```
-        cd ~/desktop
-        
-        ```
-        
-        ```
-        git clone https://github.com/strombreeding/mindLabServey.git
-        
-        ```
-        
-        ```
-        cd mindLabServey
-        
-        ```
-        
-        ```
-        npm ci
-        
-        ```
-        
-        ```
-        npm start
-        
-        ```
+	```
+	cd ~/desktop
+
+	```
+
+	```
+	git clone https://github.com/strombreeding/mindLabServey.git
+
+	```
+
+	```
+	cd mindLabServey
+
+	```
+
+	```
+	npm ci
+
+	```
+
+	```
+	npm start
+
+	```
         
 
 <br>
@@ -106,27 +106,26 @@ node -v 했을때 v18.x.x 가 나오면 설치 성공!
     2. 실행 후 아래 명령어들 차례로 실행
     붙여넣기가 안될시 쉬프트 + Insert 키
         
-        ```
-        git clone <https://github.com/strombreeding/mindLabServey.git>
-        
-            ```
-        
-            ```
-            cd mindLabServey
-        
-            ```
-        
-            ```
-            npm ci
-        
-            ```
-        
-            ```
-            npm start
-        
-            ```
-        
-        ```
+	```
+	git clone https://github.com/strombreeding/mindLabServey.git
+
+	```
+
+	```
+	cd mindLabServey
+
+	```
+
+	```
+	npm ci
+
+	```
+
+	```
+	npm start
+
+	```
+
         
 
 ### 1-4 정상적으로 실행이 되었을때
