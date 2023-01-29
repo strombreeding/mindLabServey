@@ -33,7 +33,7 @@ node 및 git 이 설치되어 있는 경우 0-3으로 넘어가주세요.
 - 깃 설치 : 아래 url 로 접속하여 운영체제에 맞게 설치
 [https://git-scm.com/downloads](https://git-scm.com/downloads)
 - node 설치
-
+<br>
 <details>
 <summary> 🪟 윈도우 에서 node & npm 설치 길라잡이 </summary>
 <div markdown="2">
@@ -42,15 +42,15 @@ node 및 git 이 설치되어 있는 경우 0-3으로 넘어가주세요.
     
 <h3>2. 윈도우키 + R 을 누르고 cmd 입력 후 실행</h3>
 
-```
 <p> 아래 명령어 입력 후, v18.x.x 가 나온다면 성공입니다! </p>
-
+<p>node -v</p>
 </div>
 
-```
   
 </details>
-  
+
+<br>
+
 <details>
 <summary> 🍏 맥 에서 node & npm 설치하기 </summary>
 <div markdown="2">
@@ -58,18 +58,14 @@ node 및 git 이 설치되어 있는 경우 0-3으로 넘어가주세요.
 <p>https://nodejs.org/ko/download/</p>
   
 <h3>2. 커맨드 + 스페이스 을 누르고 terminal 입력 후 실행</h3>
-  
-```
-node -v
-
-```
 
 node -v 했을때 v18.x.x 가 나오면 설치 성공!
 
 </div>
   
 </details>
-    
+<br>
+<br>
 
 ### 1-3 실행 하기
 
@@ -77,30 +73,30 @@ node -v 했을때 v18.x.x 가 나오면 설치 성공!
     1. CMD + 스페이스바 입력 후, terminal 입력 후 엔터
     2. 아래 명령어 복사후 붙여넣기
         
-        ```
-        cd ~/desktop
-        
-        ```
-        
-        ```
-        git clone https://github.com/strombreeding/mindLabServey.git
-        
-        ```
-        
-        ```
-        cd mindLabServey
-        
-        ```
-        
-        ```
-        npm ci
-        
-        ```
-        
-        ```
-        npm start
-        
-        ```
+	```
+	cd ~/desktop
+
+	```
+
+	```
+	git clone https://github.com/strombreeding/mindLabServey.git
+
+	```
+
+	```
+	cd mindLabServey
+
+	```
+
+	```
+	npm ci
+
+	```
+
+	```
+	npm start
+
+	```
         
 
 <br>
@@ -110,27 +106,26 @@ node -v 했을때 v18.x.x 가 나오면 설치 성공!
     2. 실행 후 아래 명령어들 차례로 실행
     붙여넣기가 안될시 쉬프트 + Insert 키
         
-        ```
-        git clone <https://github.com/strombreeding/mindLabServey.git>
-        
-            ```
-        
-            ```
-            cd mindLabServey
-        
-            ```
-        
-            ```
-            npm ci
-        
-            ```
-        
-            ```
-            npm start
-        
-            ```
-        
-        ```
+	```
+	git clone https://github.com/strombreeding/mindLabServey.git
+
+	```
+
+	```
+	cd mindLabServey
+
+	```
+
+	```
+	npm ci
+
+	```
+
+	```
+	npm start
+
+	```
+
         
 
 ### 1-4 정상적으로 실행이 되었을때
