@@ -8,7 +8,6 @@ import {
   Mutation,
   Context,
 } from '@nestjs/graphql';
-import { ApolloError } from 'apollo-server-express';
 import { CreateQuestionDto } from './config/create.dto';
 import * as utilFn from '../utils/usefulFn';
 import { QuestionService } from './question.service';
@@ -32,7 +31,7 @@ export class QeustionResolver {
   @Mutation(() => Question)
   async newQuestion(
     @Args('createQuestuinInput') createQuestionDto: CreateQuestionDto,
-    @Context() req: Request,
+    @Context('req') req: Request,
   ) {
     try {
       const newServey = await this.questionService.create(createQuestionDto);
@@ -52,7 +51,7 @@ export class QeustionResolver {
   @Mutation(() => Question)
   async updateQuestion(
     @Args('toChange') UpdateQuestionDto: UpdateQuestionDto,
-    @Context() req: Request,
+    @Context('req') req: Request,
   ) {
     try {
       const newServey = await this.questionService.changeQuestion(
@@ -73,7 +72,7 @@ export class QeustionResolver {
   @Mutation(() => Boolean)
   async deleteQuestion(
     @Args('inputQuestionId') id: number,
-    @Context() req: Request,
+    @Context('req') req: Request,
   ) {
     try {
       const newServey = await this.questionService.delete(id);
@@ -90,7 +89,7 @@ export class QeustionResolver {
   }
 
   @ResolveField(() => [Answer])
-  async hasAnswers(@Parent() question: Question, @Context() req: Request) {
+  async hasAnswers(@Parent() question: Question, @Context('req') req: Request) {
     try {
       const questions = await this.questionService.getAnswers(question);
       this.logger.log(
