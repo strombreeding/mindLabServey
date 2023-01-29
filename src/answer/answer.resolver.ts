@@ -41,7 +41,7 @@ export class AnswerResolver {
   @Mutation(() => Boolean)
   async deleteAnswer(
     @Args('inputAnswerId') id: number,
-    @Context() req: Request,
+    @Context('req') req: Request,
   ) {
     try {
       console.log(id);
@@ -61,7 +61,7 @@ export class AnswerResolver {
   @Mutation(() => Boolean)
   async updateAnswer(
     @Args('toChange') updateAnswer: UpdateAnswerDto,
-    @Context() req: Request,
+    @Context('req') req: Request,
   ) {
     const { reward, text, questionId, listNumber } = updateAnswer;
     console.log(updateAnswer);

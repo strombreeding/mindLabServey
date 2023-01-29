@@ -31,7 +31,7 @@ export class SuccessResolver {
   async serveySeccess(
     @Args('inputServeyIdAndListNumberOrUserAnswer')
     createSuccessDto: CreateSuccessDto,
-    @Context() req: Request,
+    @Context('req') req: Request,
   ) {
     try {
       console.log(createSuccessDto);
@@ -49,7 +49,7 @@ export class SuccessResolver {
   @Mutation(() => Boolean)
   async deleteSuccess(
     @Args('inputSerialNumber') id: number,
-    @Context() req: Request,
+    @Context('req') req: Request,
   ) {
     try {
       const remove = await this.successService.delete(id);
@@ -65,7 +65,7 @@ export class SuccessResolver {
   }
 
   @Query(() => [Success])
-  async allSuccess(@Context() req: Request) {
+  async allSuccess(@Context('req') req: Request) {
     try {
       const success = await this.successService.getAll();
       console.log(success);
@@ -83,7 +83,7 @@ export class SuccessResolver {
   @Query(() => Success)
   async success(
     @Args('serialNumber', { type: () => Number }) id: number,
-    @Context() req: Request,
+    @Context('req') req: Request,
   ) {
     try {
       const success = await this.successService.getOne(id);
@@ -102,7 +102,7 @@ export class SuccessResolver {
     }
   }
   @ResolveField()
-  async fromServey(@Parent() success: Success, @Context() req: Request) {
+  async fromServey(@Parent() success: Success, @Context('req') req: Request) {
     try {
       const servey = await this.successService.getServey(success);
       this.logger.log(
@@ -115,7 +115,10 @@ export class SuccessResolver {
     }
   }
   @ResolveField()
-  async hasUserAnswers(@Parent() success: Success, @Context() req: Request) {
+  async hasUserAnswers(
+    @Parent() success: Success,
+    @Context('req') req: Request,
+  ) {
     try {
       const userAnswer = await this.successService.getUserAnswer(success.id);
       this.logger.log(
